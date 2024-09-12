@@ -3,11 +3,11 @@ import time
 from machine import Pin
 
 class WiFiManager:
-    def __init__(self, ssid, password, pin=None):
+    def __init__(self, ssid, password, pin=None,mode="STA"):
         self.ssid = ssid
         self.password = password
         self.pin = pin
-        self.wlan = network.WLAN(network.STA_IF)
+        self.wlan = network.WLAN(network.STA_IF) if mode is "STA" else network.WLAN(network.AP_IF)
         self.led = Pin(pin, Pin.OUT) if pin is not None else None
         self.wlan.active(True)
 
